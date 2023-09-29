@@ -27,20 +27,28 @@ export default {
     const usernameRef = ref('')
     const password = ref(null)
     const passwordRef = ref('')
+    const clientId = ref(2)
+    const clientSecret = ref('333UIdgBrw3jyoZrxzZCjAO8KkEPiHpu41nMzDZ9')
 
 
     function login() {
       usernameRef.value.validate();
       passwordRef.value.validate();
       if (usernameRef.value.hasError || passwordRef.value.hasError) {
-       q.notify({
-        color:'red',
-        position:'center',
-        message:'invalid inputs'
-       })
-      }else{
-        api.post('oauth/token' , {
-          
+        q.notify({
+          color: 'red',
+          position: 'center',
+          message: 'invalid inputs'
+        })
+      } else {
+        api.post('oauth/token', {
+          'grant_type': 'password',
+          'client_id': clientId.value,
+          'client_secret': clientSecret.value,
+          'username': username.value,
+          'password': password.value,
+        }).then(res => {
+          console.log(res.data);
         })
       }
     }
