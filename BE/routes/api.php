@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register', function (Request $request) {
-    return response()->json([
-        'status'=>true
-    ]);
+    $user = new User();
+    $user->email = $request->email;
+    $user->password = $request->password;
+    $user->save();
+    if (!$user) return response()->json(['status' => false], 401);
+
+    return response()->json(['status' => true, 'user' => $user], 201);
 });
