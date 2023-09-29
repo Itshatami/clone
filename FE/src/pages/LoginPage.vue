@@ -49,6 +49,12 @@ export default {
           'password': password.value,
         }).then(res => {
           console.log(res.data);
+          if (res.data.access_token) {
+            q.cookies.set('access_token', res.data.access_token , {expires:'365d'});
+            q.cookies.set('refresh_token', res.data.refresh_token)
+            q.cookies.set('expires_in', res.data.expires_in)
+          }
+          router.push('/')
         })
       }
     }
