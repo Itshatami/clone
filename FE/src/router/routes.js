@@ -40,6 +40,27 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/posts",
+    component: () => import("layouts/MainLayout.vue"),
+    meta: {
+      requireAuth: true,
+    },
+    children: [
+      {
+        path: "",
+        component: () => import("pages/AllPosts.vue"),
+      },
+      {
+        path: "create",
+        component: () => import("pages/CreatePost.vue"),
+      },
+      {
+        path: "edit",
+        component: () => import("pages/EditPost.vue"),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,5 @@ Route::post('/register', function (Request $request) {
 
     return response()->json(['status' => true, 'user' => $user], 201);
 });
+
+Route::middleware('auth:api')->apiResource('posts', PostController::class);
