@@ -26,4 +26,4 @@ Route::post('/register', function (Request $request) {
     return response()->json(['status' => true, 'user' => $user], 201);
 });
 
-Route::middleware('auth:api')->apiResource('posts', PostController::class);
+Route::middleware('auth:api')->apiResource('/posts', PostController::class);
